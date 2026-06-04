@@ -187,7 +187,7 @@ What it does:
 Invariants:
 
 - the outbound payload must target `finalizeInboundTransfer`
-- the payload must preserve business-level deposit semantics without silent rewrite
+- the payload must preserve the deposit token, sender, recipient, and amount
 
 ## 5. L1ArbitrumGateway._initiateDeposit(...)
 
@@ -221,7 +221,7 @@ What it does:
 
 Invariants:
 
-- the transport-facing deposit creation step must use the already built outbound calldata without semantic rewrite
+- the transport-facing deposit creation step must use the already built outbound calldata without changing its meaning
 
 ## 6. L1ArbitrumGateway.createOutboundTxCustomRefund(...)
 
@@ -262,7 +262,7 @@ What it does:
 Invariants:
 
 - the transport-facing deposit path must target `counterpartGateway`
-- callvalue semantics must remain deterministic between the gateway layer and the inbox funding layer
+- callvalue semantics must remain consistent between the gateway layer and the inbox funding layer
 
 ## 7. L2ArbitrumGateway.finalizeInboundTransfer(...)
 
