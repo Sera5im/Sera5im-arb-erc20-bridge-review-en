@@ -152,7 +152,7 @@ What it does:
 Invariants:
 
 - the outbound payload must target `finalizeInboundTransfer`
-- the payload must preserve `_token / _from / _to / _amount` semantics without silent rewrite
+- the payload must preserve the token, sender, recipient, and amount
 - the current `exitNum` must be included in the payload before the later transport-side increment
 
 ## 5. L2ArbitrumGateway.createOutboundTx(...)
