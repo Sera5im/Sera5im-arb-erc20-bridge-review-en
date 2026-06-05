@@ -1,4 +1,5 @@
 # Arbitrum ERC20 Bridge Review
+<img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/9760967e-c295-43af-8da7-13acb3bf1890" />
 
 This repository contains my review notes on the Arbitrum ERC20 bridge paths.
 
