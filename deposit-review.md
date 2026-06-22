@@ -3,15 +3,14 @@
 ## Flow
 
 ```mermaid
-flowchart TD
-    A["Router: outboundTransferCustomRefund"] --> B["L1 Gateway: outboundTransferCustomRefund"]
-    B --> C["L1 Escrow: outboundEscrowTransfer"]
-    C --> D["Payload: getOutboundCalldata"]
-    D --> E["L1 Gateway: _initiateDeposit"]
-    E --> F["Transport Send: createOutboundTxCustomRefund"]
-    F --> G["Nitro Transport: Inbox / Retryable delivery"]
-    G --> H["L2 Gateway: finalizeInboundTransfer"]
-    H --> I["L2 Credit: inboundEscrowTransfer"]
+flowchart LR
+    A["Router: outboundTransferCustomRefund"] --> B["L1 Gateway: outboundTransferCustomRefund"] --> C["Transport Send"] --> D["L2 Gateway: finalizeInboundTransfer"] --> E["L2 Credit: inboundEscrowTransfer"]
+
+    B --> B1["L1 Escrow: outboundEscrowTransfer"]
+    B1 --> B2["Payload: getOutboundCalldata"]
+    B2 --> B3["Deposit Init: _initiateDeposit"]
+    B3 --> B4["createOutboundTxCustomRefund"]
+    B4 --> C
 ```
 
 `Inbox / Retryable delivery` is shown here only as the transport segment of the full deposit path. Nitro message-delivery internals are outside my current review scope.
