@@ -3,14 +3,14 @@
 ## Flow
 
 ```mermaid
-flowchart TD
-    A["L2 Gateway: outboundTransfer"] --> B["L2 Burn: outboundEscrowTransfer"]
-    B --> C["Withdraw Build: triggerWithdrawal"]
-    C --> D["Payload: getOutboundCalldata"]
-    D --> E["Transport Send: createOutboundTx"]
-    E --> F["Nitro Transport: Outbox / execution delivery"]
-    F --> G["L1 Gateway: finalizeInboundTransfer"]
-    G --> H["L1 Release: inboundEscrowTransfer"]
+flowchart LR
+    A["L2 Gateway: outboundTransfer"] --> B["Transport Send"] --> C["L1 Gateway: finalizeInboundTransfer"] --> D["L1 Release: inboundEscrowTransfer"]
+
+    A --> A1["L2 Burn: outboundEscrowTransfer"]
+    A1 --> A2["Withdraw Build: triggerWithdrawal"]
+    A2 --> A3["Payload: getOutboundCalldata"]
+    A3 --> A4["createOutboundTx"]
+    A4 --> B
 ```
 
 `Outbox / execution delivery` is shown here only as the transport segment of the full withdraw path. Nitro execution internals are outside my current review scope.
